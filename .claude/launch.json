@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "fpt2026-landing",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "3900", "-s", "."],
+      "port": 3900
+    }
+  ]
+}
