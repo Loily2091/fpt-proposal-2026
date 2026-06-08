@@ -116,12 +116,14 @@
   .hero-photo::after {
     content:''; position:absolute; inset:0;
   }
-  /* Hero mosaic – ảnh thực tế */
-  .hp1 { background-image:url('img/pt-bien-haidang.png'); grid-row:1/3; background-position:center; }
-  .hp2 { background-image:url('img/vt-bai-sau.jpg'); background-position:center top; }
-  .hp3 { background-image:url('img/dl-ho-rung.jpg'); background-position:center; }
-  .hp4 { background-image:url('img/pt-bau-trang.jpg'); background-position:center; }
-  .hp5 { background-image:url('img/vt-tuong-chua.webp'); background-position:center top; }
+  /* Hero mosaic – Đà Lạt + Hòn Sơn (ảnh thật) */
+  .hp1 { background-image:url('img/dl-ho-rung.jpg'); grid-row:1/3; background-position:center; }
+  .hp2 { background-image:url('img/dl-suong-mu.jpg'); background-position:center top; }
+  .hp3 { background-image:url('img/dest-honson-beach.jpg'); background-position:center; }
+  .hp4 { background-image:url('img/dest-honson-bai.webp'); background-position:center; }
+  .hp5 { background-image:url('img/dest-honson-tour.jpg'); background-position:center top; }
+  /* Hòn Sơn – ảnh thật */
+  .hs-placeholder { background-image:url('img/dest-honson-beach.jpg'); background-size:cover; background-position:center; }
 
   .hero-overlay {
     position:absolute; inset:0;
@@ -283,9 +285,8 @@
     box-shadow:0 8px 32px rgba(0,0,0,0.15);
   }
   .dest-card:hover { transform:translateY(-6px); }
-  .dest-card-bg1 { background-image:url('img/pt-bien-haidang.png'); background-position:center center; }
-  .dest-card-bg2 { background-image:url('img/vt-bai-sau.jpg'); background-position:center 40%; }
-  .dest-card-bg3 { background-image:url('img/dl-ho-rung.jpg'); background-position:center center; }
+  .dest-card-bg1 { background-image:url('img/dl-suong-mu.jpg'); background-position:center center; }
+  .dest-card-bg2 { background-image:url('img/dest-honson-beach.jpg'); background-position:center; }
   .dest-card-overlay {
     position:absolute; inset:0;
     background:linear-gradient(to top, rgba(11,29,53,0.92) 0%, rgba(11,29,53,0.2) 55%, transparent 100%);
@@ -428,7 +429,7 @@
   .concept-intro .section-title { color:var(--white); }
   .concept-intro p { color:rgba(255,255,255,0.5); font-size:15px; max-width:600px; margin:0 auto; }
 
-  .concept-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; padding:0 48px; }
+  .concept-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; padding:0 48px; max-width:900px; margin:0 auto; }
   .concept-card {
     border-radius:var(--radius-lg); overflow:hidden;
     position:relative;
@@ -713,6 +714,84 @@
     font-size:28px; font-weight:900; color:var(--gold-dark);
   }
   .pp-val small { font-family:'Be Vietnam Pro',sans-serif; font-size:13px; font-weight:500; color:var(--gray); }
+
+  /* ── SECTION KHÁCH SẠN ── */
+  .s-hotels { background:var(--cream); padding:88px 0; }
+  .hotel-tabs-nav {
+    display:flex; gap:0; margin-bottom:44px;
+    border-radius:var(--radius-md); overflow:hidden;
+    background:rgba(11,29,53,0.06);
+    border:1px solid rgba(201,168,76,0.2);
+    max-width:600px;
+  }
+  .ht-btn {
+    flex:1; padding:13px 20px; background:transparent; border:none;
+    color:var(--gray); font-family:'Be Vietnam Pro',sans-serif;
+    font-size:12px; font-weight:700; letter-spacing:0.06em;
+    text-transform:uppercase; cursor:pointer; transition:all 0.25s;
+    display:flex; align-items:center; justify-content:center; gap:7px;
+  }
+  .ht-btn:not(:last-child) { border-right:1px solid rgba(201,168,76,0.15); }
+  .ht-btn.active { background:linear-gradient(135deg,var(--navy),var(--navy-light)); color:var(--gold-light); }
+  .hotel-panel { display:none; }
+  .hotel-panel.active { display:block; }
+
+  /* Hotel cards grid */
+  .hotels-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .hotel-card {
+    background:var(--white); border-radius:var(--radius-lg);
+    overflow:hidden; border:1px solid rgba(201,168,76,0.12);
+    box-shadow:0 4px 24px rgba(0,0,0,0.06);
+    transition:all 0.3s;
+  }
+  .hotel-card:hover { transform:translateY(-5px); box-shadow:0 14px 44px rgba(0,0,0,0.1); border-color:var(--gold); }
+
+  /* Photo carousel per hotel */
+  .hotel-photos {
+    height:200px; position:relative; overflow:hidden; background:#f3f4f6;
+  }
+  .hotel-photo-slide {
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+    opacity:0; transition:opacity 0.5s ease;
+  }
+  .hotel-photo-slide.active { opacity:1; }
+  .hotel-photo-nav {
+    position:absolute; bottom:10px; left:50%; transform:translateX(-50%);
+    display:flex; gap:5px; z-index:2;
+  }
+  .hp-dot {
+    width:6px; height:6px; border-radius:50%;
+    background:rgba(255,255,255,0.5); cursor:pointer; transition:all 0.2s;
+    border:none;
+  }
+  .hp-dot.active { background:var(--white); transform:scale(1.3); }
+  .hotel-badge {
+    position:absolute; top:12px; left:12px; z-index:2;
+    background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+    color:var(--navy); font-size:9px; font-weight:800;
+    letter-spacing:0.1em; text-transform:uppercase;
+    padding:3px 10px; border-radius:999px;
+  }
+
+  .hotel-info { padding:20px; }
+  .hotel-name { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:var(--navy); margin-bottom:6px; }
+  .hotel-stars { color:var(--gold); font-size:13px; margin-bottom:8px; }
+  .hotel-features { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+  .hotel-feat {
+    font-size:10px; font-weight:600; letter-spacing:0.05em;
+    padding:3px 9px; border-radius:999px;
+    background:var(--gold-pale); color:var(--gold-dark);
+    border:1px solid rgba(201,168,76,0.25);
+  }
+  .hotel-price-row { display:flex; align-items:center; justify-content:space-between; padding-top:10px; border-top:1px solid rgba(201,168,76,0.12); }
+  .hotel-price { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--gold-dark); }
+  .hotel-price-unit { font-family:'Be Vietnam Pro',sans-serif; font-size:11px; color:var(--gray); }
+
+  @media(max-width:960px){
+    .hotels-grid { grid-template-columns:1fr; }
+    .hotel-tabs-nav { max-width:100%; }
+  }
 
   /* ── SECTION 6: PROFILE ── */
   .s6 { background:var(--white); }
@@ -1064,31 +1143,22 @@
 
     <!-- Right card: 3 destinations -->
     <div class="hero-card">
-      <div class="hero-card-title">✦ 3 điểm đến đang chào bán</div>
-      <div class="dest-thumb dt1">
-        <div class="dest-thumb-overlay">
-          <span class="dest-thumb-icon">🏖️</span>
-          <div class="dest-thumb-info">
-            <span class="dest-thumb-name">Phan Thiết – Mũi Né</span>
-            <span class="dest-thumb-price">~3.983.000 đ / khách</span>
-          </div>
-        </div>
-      </div>
-      <div class="dest-thumb dt2">
-        <div class="dest-thumb-overlay">
-          <span class="dest-thumb-icon">🌊</span>
-          <div class="dest-thumb-info">
-            <span class="dest-thumb-name">Vũng Tàu – Bình Châu</span>
-            <span class="dest-thumb-price">~4.379.000 đ / khách</span>
-          </div>
-        </div>
-      </div>
-      <div class="dest-thumb dt3">
+      <div class="hero-card-title">✦ 2 điểm đến đang chào bán</div>
+      <div class="dest-thumb dt3" style="height:120px">
         <div class="dest-thumb-overlay">
           <span class="dest-thumb-icon">🌲</span>
           <div class="dest-thumb-info">
             <span class="dest-thumb-name">Đà Lạt – Cao nguyên</span>
-            <span class="dest-thumb-price">~4.168.000 đ / khách</span>
+            <span class="dest-thumb-price">Cập nhật giá sau</span>
+          </div>
+        </div>
+      </div>
+      <div class="dest-thumb hs-placeholder" style="height:120px">
+        <div class="dest-thumb-overlay">
+          <span class="dest-thumb-icon">🏝️</span>
+          <div class="dest-thumb-info">
+            <span class="dest-thumb-name">Hòn Sơn – Đảo Kiên Giang</span>
+            <span class="dest-thumb-price">Cập nhật giá sau</span>
           </div>
         </div>
       </div>
@@ -1103,32 +1173,24 @@
   <div class="section-inner">
 
     <!-- Destinations visual -->
-    <div class="section-label">3 điểm đến nổi bật</div>
+    <div class="section-label">2 điểm đến nổi bật</div>
     <h2 class="section-title">Lựa Chọn Hành Trình Của Bạn</h2>
     <div class="gold-bar"></div>
-    <div class="dest-grid">
+    <div class="dest-grid" style="grid-template-columns:1fr 1fr;max-width:800px">
       <div class="dest-card dest-card-bg1">
-        <div class="dest-card-overlay">
-          <span class="dest-card-icon">🏖️</span>
-          <div class="dest-card-name">Phan Thiết</div>
-          <div class="dest-card-sub">Mũi Né · Bikini Beach · Bàu Trắng</div>
-          <span class="dest-card-price">3.983.000 đ / khách</span>
-        </div>
-      </div>
-      <div class="dest-card dest-card-bg2">
-        <div class="dest-card-overlay">
-          <span class="dest-card-icon">🌊</span>
-          <div class="dest-card-name">Vũng Tàu</div>
-          <div class="dest-card-sub">Bình Châu · Khoáng nóng 82°C</div>
-          <span class="dest-card-price">4.379.000 đ / khách</span>
-        </div>
-      </div>
-      <div class="dest-card dest-card-bg3">
         <div class="dest-card-overlay">
           <span class="dest-card-icon">🌲</span>
           <div class="dest-card-name">Đà Lạt</div>
           <div class="dest-card-sub">Panorama · Langbiang · Cồng Chiêng</div>
-          <span class="dest-card-price">4.168.000 đ / khách</span>
+          <span class="dest-card-price">3.865.366 đ / khách · 70 người</span>
+        </div>
+      </div>
+      <div class="dest-card dest-card-bg2">
+        <div class="dest-card-overlay">
+          <span class="dest-card-icon">🏝️</span>
+          <div class="dest-card-name">Hòn Sơn</div>
+          <div class="dest-card-sub">Bãi Bàng · Homestay Yến Linh · Tàu cao tốc</div>
+          <span class="dest-card-price">1.999.210 đ / khách · 30 người</span>
         </div>
       </div>
     </div>
@@ -1180,13 +1242,12 @@
     </div>
 
     <div class="tabs-nav">
-      <button class="tab-btn active" onclick="switchTab('pt',this)"><span class="tab-emoji">🏖️</span>PHAN THIẾT – MŨI NÉ</button>
-      <button class="tab-btn" onclick="switchTab('vt',this)"><span class="tab-emoji">🌊</span>VŨNG TÀU – BÌNH CHÂU</button>
-      <button class="tab-btn" onclick="switchTab('dl',this)"><span class="tab-emoji">🌲</span>ĐÀ LẠT</button>
+      <button class="tab-btn active" onclick="switchTab('dl',this)"><span class="tab-emoji">🌲</span>ĐÀ LẠT – CAO NGUYÊN</button>
+      <button class="tab-btn" onclick="switchTab('hs',this)"><span class="tab-emoji">🏝️</span>HÒN SƠN – ĐẢO XANH</button>
     </div>
 
-    <!-- TAB PHAN THIẾT -->
-    <div class="tab-panel active" id="tab-pt">
+    <!-- TAB ĐÃ XÓA: PHAN THIẾT -->
+    <div class="tab-panel" id="tab-pt-removed" style="display:none">
       <div class="tl-section-head">🌙 ĐÊM KHỞI HÀNH · 04/07 · RẠCH GIÁ – PHAN THIẾT</div>
       <div class="timeline">
         <div class="tl-item"><div class="tl-time">20:00</div><div class="tl-text">3 xe đời mới và 3 HDV đón đoàn tại điểm hẹn trung tâm TP. Rạch Giá. Phát nước, nón du lịch.</div></div>
@@ -1225,8 +1286,8 @@
       </div>
     </div>
 
-    <!-- TAB VŨNG TÀU -->
-    <div class="tab-panel" id="tab-vt">
+    <!-- TAB ĐÃ XÓA: VŨNG TÀU -->
+    <div class="tab-panel" id="tab-vt-removed" style="display:none">
       <div class="tl-section-head">🌙 ĐÊM KHỞI HÀNH · 04/07 · RẠCH GIÁ – BÌNH CHÂU</div>
       <div class="timeline">
         <div class="tl-item"><div class="tl-time">20:00</div><div class="tl-text">3 xe và 3 HDV đón đoàn tại điểm hẹn trung tâm TP. Rạch Giá.</div></div>
@@ -1265,8 +1326,8 @@
       </div>
     </div>
 
-    <!-- TAB ĐÀ LẠT -->
-    <div class="tab-panel" id="tab-dl">
+    <!-- TAB ĐÀ LẠT – ACTIVE -->
+    <div class="tab-panel active" id="tab-dl">
       <div class="tl-section-head">🌙 ĐÊM KHỞI HÀNH · 04/07 · RẠCH GIÁ – ĐÀ LẠT</div>
       <div class="timeline">
         <div class="tl-item"><div class="tl-time">16:30</div><div class="tl-text">3 xe đời mới và 3 HDV đón đoàn tại điểm hẹn trung tâm TP. Rạch Giá, ổn định hành lý.</div></div>
@@ -1301,6 +1362,22 @@
         <div class="tl-item"><div class="tl-time">23:30</div><div class="tl-text">Về đến TP. Rạch Giá. Kết thúc hành trình 🎉</div></div>
       </div>
     </div>
+
+    <!-- TAB HÒN SƠN – PLACEHOLDER (chờ nội dung từ file Excel) -->
+    <div class="tab-panel" id="tab-hs">
+      <div style="text-align:center;padding:60px 20px;background:rgba(255,255,255,0.03);border-radius:16px;border:1px dashed rgba(201,168,76,0.3)">
+        <div style="font-size:48px;margin-bottom:16px">🏝️</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--white);margin-bottom:12px">Hòn Sơn – Đảo Xanh Kiên Giang</h3>
+        <p style="color:rgba(255,255,255,0.5);font-size:14px;max-width:480px;margin:0 auto 20px">Lịch trình chi tiết đang được cập nhật sau khi nhận đủ thông tin từ Golden Link.</p>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:999px;padding:8px 20px;color:var(--gold);font-size:12px;font-weight:700">⏳ Đang cập nhật nội dung</div>
+        <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center;max-width:480px;margin:32px auto 0">
+          <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:16px"><div style="font-size:22px;margin-bottom:6px">⛵</div><div style="font-size:11px;color:rgba(255,255,255,0.5)">Tàu cao tốc<br>từ Rạch Giá</div></div>
+          <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:16px"><div style="font-size:22px;margin-bottom:6px">🤿</div><div style="font-size:11px;color:rgba(255,255,255,0.5)">Lặn ngắm<br>san hô</div></div>
+          <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:16px"><div style="font-size:22px;margin-bottom:6px">⛺</div><div style="font-size:11px;color:rgba(255,255,255,0.5)">Golden Camp<br>Hòn Sơn</div></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1316,7 +1393,7 @@
 
   <div class="concept-grid">
 
-    <!-- ── OPTION 1: PHAN THIẾT ── -->
+    <!-- ── OPTION 1: PHAN THIẾT (ĐÃ XÓA) ── --><div style="display:none">
     <div class="concept-card">
       <div class="concept-photo" style="background-image:url('img/pt-bien-haidang.png')">
         <span class="concept-option-badge">Option 1</span>
@@ -1345,7 +1422,8 @@
       </div>
     </div>
 
-    <!-- ── OPTION 2: VŨNG TÀU ── -->
+    </div><!-- end hidden PT -->
+    <!-- ── OPTION 2: VŨNG TÀU (ĐÃ XÓA) ── --><div style="display:none">
     <div class="concept-card">
       <div class="concept-photo" style="background-image:url('img/vt-bai-sau.jpg');background-position:center 40%">
         <span class="concept-option-badge">Option 2</span>
@@ -1374,10 +1452,11 @@
       </div>
     </div>
 
-    <!-- ── OPTION 3: ĐÀ LẠT ── -->
+    </div><!-- end hidden VT -->
+    <!-- ── OPTION 1: ĐÀ LẠT ── -->
     <div class="concept-card">
       <div class="concept-photo" style="background-image:url('img/dl-ho-rung.jpg');background-position:center">
-        <span class="concept-option-badge">Option 3</span>
+        <span class="concept-option-badge">Option 1</span>
         <div class="concept-dest-badge">
           <span class="concept-dest-name">🌲 Đà Lạt – Langbiang</span>
           <span class="concept-dest-sub">Khát vọng · Chinh phục · Bản sắc cao nguyên</span>
@@ -1399,6 +1478,35 @@
           <div class="concept-theme-name">GIAI ĐIỆU CAO NGUYÊN<br>LỬA THIÊNG KẾT NỐI</div>
           <div class="concept-design">🎨 Hoang dã nhưng sang trọng — sảnh tiệc hiện đại lồng ghép văn hóa bản địa Tây Nguyên.</div>
           <div class="concept-highlight">✦ Cao trào: 100 thành viên FPT cùng nắm tay quanh đống lửa lớn · Uống rượu cần · Nhảy vũ điệu xoang Giao lưu Cồng Chiêng — kỷ niệm kết nối tinh thần mà các tour biển không có được</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── OPTION 2: HÒN SƠN ── -->
+    <div class="concept-card">
+      <div class="concept-photo hs-placeholder">
+        <span class="concept-option-badge">Option 2</span>
+        <div class="concept-dest-badge">
+          <span class="concept-dest-name">🏝️ Hòn Sơn – Đảo Xanh</span>
+          <span class="concept-dest-sub">Hoang sơ · Golden Camp · Biển trong vắt</span>
+        </div>
+      </div>
+      <div class="ca-teal concept-accent" style="background:linear-gradient(90deg,#0d7a5e,#1aaf85)"></div>
+      <div class="concept-body">
+        <div class="concept-slogan">"Vượt sóng ra khơi – Chạm đảo thiên đường"</div>
+
+        <div class="concept-block">
+          <div class="concept-block-label lbl-tb">🔥 Team Building</div>
+          <div class="concept-theme-name">VƯỢT SÓNG RA KHƠI<br>CHINH PHỤC ĐẢO XANH</div>
+          <div class="concept-design">🎨 Tone xanh biển đảo kết hợp cam FPT — cảm giác phiêu lưu, hoang dã và gắn kết.</div>
+          <div class="concept-meaning">Các trò chơi vận động trên bãi cát Hòn Sơn: đua thuyền kayak, xây lâu đài cát, tìm kho báu đảo xa — đòi hỏi sự phối hợp và tinh thần đồng đội tuyệt vời giữa 100 thành viên FPT.</div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-block-label lbl-gala">🎤 Gala Dinner</div>
+          <div class="concept-theme-name">ĐÊM BIỂN ĐẢO<br>HỒN THIÊNG GOLDEN CAMP</div>
+          <div class="concept-design">🎨 Tiệc tối lộ thiên ngay bên bờ biển đảo Hòn Sơn — ánh đèn fairy light, lửa trại, biển đêm huyền ảo.</div>
+          <div class="concept-highlight">✦ Tiệc hải sản tươi ngay tại đảo · Lửa trại bên biển · Gameshow sân khấu với MC · Kết thúc bằng màn bắn pháo sáng trên biển đêm Hòn Sơn không thể quên</div>
         </div>
       </div>
     </div>
@@ -1441,13 +1549,12 @@
 
     <!-- Tab chọn điểm đến -->
     <div class="price-tabs-nav">
-      <button class="pt-btn active" onclick="switchPrice('pt',this)">🏖️ Phan Thiết</button>
-      <button class="pt-btn" onclick="switchPrice('vt',this)">🌊 Vũng Tàu</button>
-      <button class="pt-btn" onclick="switchPrice('dl',this)">🌲 Đà Lạt</button>
+      <button class="pt-btn active" onclick="switchPrice('dl',this)">🌲 Đà Lạt</button>
+      <button class="pt-btn" onclick="switchPrice('hs',this)">🏝️ Hòn Sơn</button>
     </div>
 
-    <!-- ══ PHAN THIẾT ══ -->
-    <div class="price-panel active" id="price-pt">
+    <!-- ══ PHAN THIẾT (ĐÃ XÓA) ══ -->
+    <div class="price-panel" id="price-pt" style="display:none">
       <div class="price-detail-card">
         <div class="pd-header pp1">
           <div class="pd-header-content">
@@ -1505,7 +1612,7 @@
       </div>
     </div>
 
-    <!-- ══ VŨNG TÀU ══ -->
+    <!-- ══ VŨNG TÀU (ĐÃ XÓA) ══ --><div style="display:none" id="price-vt-removed">
     <div class="price-panel" id="price-vt">
       <div class="price-detail-card">
         <div class="pd-header pp2">
@@ -1563,14 +1670,15 @@
       </div>
     </div>
 
-    <!-- ══ ĐÀ LẠT ══ -->
-    <div class="price-panel" id="price-dl">
+    </div><!-- end hidden VT -->
+    <!-- ══ ĐÀ LẠT – ACTIVE (70 khách – update 08/06) ══ -->
+    <div class="price-panel active" id="price-dl">
       <div class="price-detail-card">
         <div class="pd-header pp3">
           <div class="pd-header-content">
             <div>
-              <span class="pd-dest-name">🌲 Đà Lạt – Langbiang</span>
-              <span class="pd-dest-sub">Khu săn mây Panorama · Langbiang Land · Giao lưu Cồng Chiêng · 3 Ngày 3 Đêm</span>
+              <span class="pd-dest-name">🌲 Đà Lạt – Cao Nguyên</span>
+              <span class="pd-dest-sub">Đồi Chè Cầu Đất · Langbiang Land · Amazing Race · Gala Dinner · 3 Ngày 3 Đêm</span>
             </div>
             <div class="pd-price-highlight">
               <span class="pd-price-label">Giá / khách</span>
@@ -1582,43 +1690,321 @@
           <table class="pd-table">
             <thead><tr><th style="width:32%">Hạng mục dịch vụ</th><th style="width:20%">Mô tả / Ghi chú</th><th style="width:7%;text-align:right">ĐVT</th><th style="width:5%;text-align:right">SL</th><th style="width:5%;text-align:right">Lần</th><th style="width:13%;text-align:right">Đơn giá (đ)</th><th style="width:14%;text-align:right">Thành tiền (đ)</th></tr></thead>
             <tbody>
-              <tr class="cat-row"><td colspan="6">🚌 PHƯƠNG TIỆN</td><td class="cat-total td-right">76.000.000</td></tr>
-              <tr><td class="td-name">Xe 45 chỗ đời mới</td><td class="td-note">Universe, máy lạnh</td><td class="td-right">Xe</td><td class="td-right">2</td><td class="td-right">1</td><td class="td-right">26.000.000</td><td class="td-right">52.000.000</td></tr>
+              <tr class="cat-row"><td colspan="6">🚌 PHƯƠNG TIỆN</td><td class="cat-total td-right">50.000.000</td></tr>
+              <tr><td class="td-name">Xe 45 chỗ đời mới</td><td class="td-note">Universe, máy lạnh</td><td class="td-right">Xe</td><td class="td-right">1</td><td class="td-right">1</td><td class="td-right">26.000.000</td><td class="td-right">26.000.000</td></tr>
               <tr><td class="td-name">Xe 35 chỗ đời mới</td><td class="td-note">Máy lạnh</td><td class="td-right">Xe</td><td class="td-right">1</td><td class="td-right">1</td><td class="td-right">24.000.000</td><td class="td-right">24.000.000</td></tr>
-              <tr class="cat-row"><td colspan="6">🏨 LƯU TRÚ</td><td class="cat-total td-right">95.000.000</td></tr>
-              <tr><td class="td-name">Khách sạn 3 Sao</td><td class="td-note">Rum Vàng / Westeria / Thành Đồng / Lily / Camelia</td><td class="td-right">Phòng</td><td class="td-right">50</td><td class="td-right">2</td><td class="td-right">950.000</td><td class="td-right">95.000.000</td></tr>
-              <tr class="cat-row"><td colspan="6">🍽️ ĂN UỐNG</td><td class="cat-total td-right">120.500.000</td></tr>
-              <tr><td class="td-name">Ăn sáng ngày 1</td><td class="td-note">Tô + Ly – Nhà hàng trung tâm</td><td class="td-right">Suất</td><td class="td-right">100</td><td class="td-right">1</td><td class="td-right">75.000</td><td class="td-right">7.500.000</td></tr>
-              <tr><td class="td-name">Ăn trưa ngày 1</td><td class="td-note">Nhà hàng trung tâm</td><td class="td-right">Suất</td><td class="td-right">100</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">15.000.000</td></tr>
-              <tr><td class="td-name">Ăn tối ngày 1</td><td class="td-note">Nhà hàng trung tâm</td><td class="td-right">Suất</td><td class="td-right">100</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">15.000.000</td></tr>
-              <tr><td class="td-name">Ăn trưa ngày 2 – <strong>Buffet Rau</strong></td><td class="td-note">Đặc sản cao nguyên Đà Lạt</td><td class="td-right">Suất</td><td class="td-right">100</td><td class="td-right">1</td><td class="td-right">180.000</td><td class="td-right">18.000.000</td></tr>
-              <tr><td class="td-name">Ăn tối ngày 2 – <strong>GALA DINNER</strong></td><td class="td-note">Tiệc tối cao cấp</td><td class="td-right">Suất</td><td class="td-right">100</td><td class="td-right">1</td><td class="td-right">350.000</td><td class="td-right">35.000.000</td></tr>
-              <tr><td class="td-name">Ăn trưa ngày 3</td><td class="td-note">Nhà hàng Bảo Lộc</td><td class="td-right">Suất</td><td class="td-right">100</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">15.000.000</td></tr>
-              <tr><td class="td-name">Ăn tối ngày 3</td><td class="td-note">Trên đường về</td><td class="td-right">Suất</td><td class="td-right">100</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">15.000.000</td></tr>
-              <tr class="cat-row"><td colspan="6">👥 NHÂN SỰ</td><td class="cat-total td-right">21.200.000</td></tr>
-              <tr><td class="td-name">Hướng dẫn viên</td><td class="td-note">Phục vụ suốt tuyến</td><td class="td-right">Người</td><td class="td-right">3</td><td class="td-right">4</td><td class="td-right">800.000</td><td class="td-right">9.600.000</td></tr>
-              <tr><td class="td-name">MC Team Building + Gala</td><td class="td-note"></td><td class="td-right">Show</td><td class="td-right">1</td><td class="td-right">2</td><td class="td-right">4.000.000</td><td class="td-right">8.000.000</td></tr>
-              <tr><td class="td-name">Ăn ngủ HDV</td><td class="td-note"></td><td class="td-right">Người</td><td class="td-right">3</td><td class="td-right">3</td><td class="td-right">400.000</td><td class="td-right">3.600.000</td></tr>
-              <tr class="cat-row"><td colspan="6">📦 CHI PHÍ KHÁC</td><td class="cat-total td-right">44.650.000</td></tr>
-              <tr><td class="td-name">Nước uống</td><td class="td-note">Aquafina/Lavie – 2 chai/ngày/khách</td><td class="td-right">Thùng</td><td class="td-right">25</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">3.750.000</td></tr>
-              <tr><td class="td-name">Gói Team Building Game</td><td class="td-note"></td><td class="td-right">Show</td><td class="td-right">1</td><td class="td-right">1</td><td class="td-right">10.000.000</td><td class="td-right">10.000.000</td></tr>
-              <tr><td class="td-name">Tham quan – Khu săn mây PANORAMA</td><td class="td-note">Đón bình minh, cà phê săn mây</td><td class="td-right">Người</td><td class="td-right">100</td><td class="td-right">1</td><td class="td-right">120.000</td><td class="td-right">12.000.000</td></tr>
-              <tr><td class="td-name">Tham quan – LANGBIANG LAND</td><td class="td-note">Vé vào cửa + trải nghiệm</td><td class="td-right">Người</td><td class="td-right">100</td><td class="td-right">1</td><td class="td-right">120.000</td><td class="td-right">12.000.000</td></tr>
+              <tr class="cat-row"><td colspan="6">🏨 LƯU TRÚ</td><td class="cat-total td-right">56.000.000</td></tr>
+              <tr><td class="td-name">Khách sạn 3 Sao (suất ngủ/khách)</td><td class="td-note">Royal Palace / Westeria / Thành Đồng / Lily / Camelia / Flora</td><td class="td-right">Suất ngủ</td><td class="td-right">70</td><td class="td-right">2</td><td class="td-right">400.000</td><td class="td-right">56.000.000</td></tr>
+              <tr class="cat-row"><td colspan="6">🍽️ ĂN UỐNG</td><td class="cat-total td-right">80.850.000</td></tr>
+              <tr><td class="td-name">Ăn sáng ngày 1</td><td class="td-note">Tô + Ly – Nhà hàng trung tâm</td><td class="td-right">Suất</td><td class="td-right">70</td><td class="td-right">1</td><td class="td-right">75.000</td><td class="td-right">5.250.000</td></tr>
+              <tr><td class="td-name">Ăn trưa ngày 1</td><td class="td-note">Nhà hàng trung tâm</td><td class="td-right">Suất</td><td class="td-right">70</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">10.500.000</td></tr>
+              <tr><td class="td-name">Ăn tối ngày 1</td><td class="td-note">Nhà hàng trung tâm</td><td class="td-right">Suất</td><td class="td-right">70</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">10.500.000</td></tr>
+              <tr><td class="td-name">Ăn trưa ngày 2 – <strong>Buffet Rau</strong></td><td class="td-note">Đặc sản cao nguyên Đà Lạt</td><td class="td-right">Suất</td><td class="td-right">70</td><td class="td-right">1</td><td class="td-right">180.000</td><td class="td-right">12.600.000</td></tr>
+              <tr><td class="td-name">Ăn tối ngày 2 – <strong>GALA DINNER</strong></td><td class="td-note">Tiệc tối cao cấp</td><td class="td-right">Suất</td><td class="td-right">70</td><td class="td-right">1</td><td class="td-right">300.000</td><td class="td-right">21.000.000</td></tr>
+              <tr><td class="td-name">Ăn trưa ngày 3</td><td class="td-note">Nhà hàng Bảo Lộc</td><td class="td-right">Suất</td><td class="td-right">70</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">10.500.000</td></tr>
+              <tr><td class="td-name">Ăn tối ngày 3</td><td class="td-note">Trên đường về</td><td class="td-right">Suất</td><td class="td-right">70</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">10.500.000</td></tr>
+              <tr class="cat-row"><td colspan="6">👥 NHÂN SỰ</td><td class="cat-total td-right">13.800.000</td></tr>
+              <tr><td class="td-name">Hướng dẫn viên</td><td class="td-note">Phục vụ suốt tuyến</td><td class="td-right">Người</td><td class="td-right">2</td><td class="td-right">4</td><td class="td-right">800.000</td><td class="td-right">6.400.000</td></tr>
+              <tr><td class="td-name">MC Team Building + Gala</td><td class="td-note">Amazing Race + Gala Dinner</td><td class="td-right">Show</td><td class="td-right">1</td><td class="td-right">2</td><td class="td-right">2.500.000</td><td class="td-right">5.000.000</td></tr>
+              <tr><td class="td-name">Ăn ngủ HDV</td><td class="td-note"></td><td class="td-right">Người</td><td class="td-right">2</td><td class="td-right">3</td><td class="td-right">400.000</td><td class="td-right">2.400.000</td></tr>
+              <tr class="cat-row"><td colspan="6">📦 CHI PHÍ KHÁC</td><td class="cat-total td-right">31.325.000</td></tr>
+              <tr><td class="td-name">Nước uống</td><td class="td-note">Aquafina/Lavie – 2 chai/ngày/khách</td><td class="td-right">Thùng</td><td class="td-right">18</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">2.625.000</td></tr>
+              <tr><td class="td-name">Team Building – <strong>AMAZING RACE</strong></td><td class="td-note">Game vận động đội nhóm</td><td class="td-right">Show</td><td class="td-right">1</td><td class="td-right">1</td><td class="td-right">8.000.000</td><td class="td-right">8.000.000</td></tr>
+              <tr><td class="td-name">Tham quan – Đồi Chè Cầu Đất</td><td class="td-note">Vé vào + trải nghiệm</td><td class="td-right">Người</td><td class="td-right">70</td><td class="td-right">1</td><td class="td-right">120.000</td><td class="td-right">8.400.000</td></tr>
+              <tr><td class="td-name">Tham quan – LANGBIANG LAND</td><td class="td-note">Vé vào cửa + xe Jeep</td><td class="td-right">Người</td><td class="td-right">70</td><td class="td-right">1</td><td class="td-right">120.000</td><td class="td-right">8.400.000</td></tr>
               <tr><td class="td-name">Phí bãi xe tham quan</td><td class="td-note"></td><td class="td-right">Xe</td><td class="td-right">2</td><td class="td-right">1</td><td class="td-right">200.000</td><td class="td-right">400.000</td></tr>
-              <tr><td class="td-name">Khăn lạnh</td><td class="td-note"></td><td class="td-right">Cái</td><td class="td-right">300</td><td class="td-right">1</td><td class="td-right">2.000</td><td class="td-right">600.000</td></tr>
-              <tr><td class="td-name">In ấn – Banner + Backdrop</td><td class="td-note">Treo xe và khách sạn</td><td class="td-right">Cái</td><td class="td-right">3</td><td class="td-right">1</td><td class="td-right">300.000</td><td class="td-right">900.000</td></tr>
-              <tr><td class="td-name">Bảo hiểm du lịch</td><td class="td-note"></td><td class="td-right">Gói</td><td class="td-right">100</td><td class="td-right">3</td><td class="td-right">10.000</td><td class="td-right">3.000.000</td></tr>
-              <tr class="sum-row"><td colspan="6"><strong>Tổng cộng dịch vụ (chưa bao gồm VAT)</strong></td><td class="td-right"><strong>357.350.000</strong></td></tr>
-              <tr class="tax-row"><td colspan="6">Phí tổ chức <span class="tax-pct">8%</span></td><td class="td-right">28.588.000</td></tr>
-              <tr class="tax-row"><td colspan="6">Thuế VAT <span class="tax-pct">8%</span></td><td class="td-right">30.875.040</td></tr>
-              <tr class="grand-row"><td colspan="6"><strong>TỔNG GIÁ TRỊ HỢP ĐỒNG SAU THUẾ</strong></td><td class="td-right"><strong>416.813.040 đ</strong></td></tr>
+              <tr><td class="td-name">Nón du lịch</td><td class="td-note"></td><td class="td-right">Nón</td><td class="td-right">70</td><td class="td-right">1</td><td class="td-right">20.000</td><td class="td-right">1.400.000</td></tr>
+              <tr><td class="td-name">Bảo hiểm du lịch</td><td class="td-note"></td><td class="td-right">Gói</td><td class="td-right">70</td><td class="td-right">3</td><td class="td-right">10.000</td><td class="td-right">2.100.000</td></tr>
+              <tr class="sum-row"><td colspan="6"><strong>Tổng cộng dịch vụ (chưa bao gồm VAT)</strong></td><td class="td-right"><strong>231.975.000</strong></td></tr>
+              <tr class="tax-row"><td colspan="6">Phí tổ chức <span class="tax-pct">8%</span></td><td class="td-right">18.558.000</td></tr>
+              <tr class="tax-row"><td colspan="6">Thuế VAT <span class="tax-pct">8%</span></td><td class="td-right">20.042.640</td></tr>
+              <tr class="grand-row"><td colspan="6"><strong>TỔNG GIÁ TRỊ HỢP ĐỒNG SAU THUẾ</strong></td><td class="td-right"><strong>270.575.640 đ</strong></td></tr>
             </tbody>
           </table>
           <div class="per-person-bar">
-            <div class="pp-label">Chi phí / khách (100 người)<span>Đã bao gồm phí tổ chức và thuế VAT 8%</span></div>
-            <div class="pp-val">4.168.130 <small>đ/người</small></div>
+            <div class="pp-label">Chi phí / khách (70 người)<span>Đã bao gồm phí tổ chức 8% và thuế VAT 8%</span></div>
+            <div class="pp-val">3.865.366 <small>đ/người</small></div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- ══ HÒN SƠN – ĐẦY ĐỦ (30 khách – update 08/06) ══ -->
+    <div class="price-panel" id="price-hs">
+      <div class="price-detail-card">
+        <div class="pd-header hs-placeholder">
+          <div class="pd-header-content">
+            <div>
+              <span class="pd-dest-name">🏝️ Hòn Sơn – Đảo Xanh</span>
+              <span class="pd-dest-sub">Tàu cao tốc · Bãi Bàng · Homestay Yến Linh · Gala Dinner · 2 Ngày 1 Đêm</span>
+            </div>
+            <div class="pd-price-highlight">
+              <span class="pd-price-label">Giá / khách</span>
+              <span class="pd-price-val">1.999<span class="pd-price-unit">k đ</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="pd-body">
+          <table class="pd-table">
+            <thead><tr><th style="width:32%">Hạng mục dịch vụ</th><th style="width:20%">Mô tả / Ghi chú</th><th style="width:7%;text-align:right">ĐVT</th><th style="width:5%;text-align:right">SL</th><th style="width:5%;text-align:right">Lần</th><th style="width:13%;text-align:right">Đơn giá (đ)</th><th style="width:14%;text-align:right">Thành tiền (đ)</th></tr></thead>
+            <tbody>
+              <tr class="cat-row"><td colspan="6">⛵ PHƯƠNG TIỆN</td><td class="cat-total td-right">13.800.000</td></tr>
+              <tr><td class="td-name">Vé tàu cao tốc</td><td class="td-note">Rạch Giá – Hòn Sơn khứ hồi</td><td class="td-right">Người</td><td class="td-right">30</td><td class="td-right">2</td><td class="td-right">180.000</td><td class="td-right">10.800.000</td></tr>
+              <tr><td class="td-name">Xe máy tham quan đảo</td><td class="td-note"></td><td class="td-right">Xe</td><td class="td-right">15</td><td class="td-right">1</td><td class="td-right">200.000</td><td class="td-right">3.000.000</td></tr>
+              <tr class="cat-row"><td colspan="6">🏡 LƯU TRÚ</td><td class="cat-total td-right">7.500.000</td></tr>
+              <tr><td class="td-name">Nhà nghỉ tiêu chuẩn</td><td class="td-note">Yến Linh / Hồng Cúc / Phương Duyên</td><td class="td-right">Phòng</td><td class="td-right">15</td><td class="td-right">1</td><td class="td-right">500.000</td><td class="td-right">7.500.000</td></tr>
+              <tr class="cat-row"><td colspan="6">🍽️ ĂN UỐNG</td><td class="cat-total td-right">19.950.000</td></tr>
+              <tr><td class="td-name">Ăn trưa ngày 1</td><td class="td-note">Nhà hàng Hòn Sơn</td><td class="td-right">Suất</td><td class="td-right">30</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">4.500.000</td></tr>
+              <tr><td class="td-name">Ăn tối ngày 1 – <strong>GALA DINNER</strong></td><td class="td-note">Tiệc tối trên đảo</td><td class="td-right">Suất</td><td class="td-right">30</td><td class="td-right">1</td><td class="td-right">300.000</td><td class="td-right">9.000.000</td></tr>
+              <tr><td class="td-name">Ăn sáng ngày 2</td><td class="td-note">Nhà hàng / Homestay</td><td class="td-right">Suất</td><td class="td-right">30</td><td class="td-right">1</td><td class="td-right">65.000</td><td class="td-right">1.950.000</td></tr>
+              <tr><td class="td-name">Ăn trưa ngày 2</td><td class="td-note">Nhà hàng Hòn Sơn</td><td class="td-right">Suất</td><td class="td-right">30</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">4.500.000</td></tr>
+              <tr class="cat-row"><td colspan="6">👥 NHÂN SỰ</td><td class="cat-total td-right">4.200.000</td></tr>
+              <tr><td class="td-name">Hướng dẫn viên</td><td class="td-note">Phục vụ suốt tuyến</td><td class="td-right">Người</td><td class="td-right">1</td><td class="td-right">2</td><td class="td-right">800.000</td><td class="td-right">1.600.000</td></tr>
+              <tr><td class="td-name">MC Team Building + Gala</td><td class="td-note"></td><td class="td-right">Show</td><td class="td-right">1</td><td class="td-right">1</td><td class="td-right">2.000.000</td><td class="td-right">2.000.000</td></tr>
+              <tr><td class="td-name">Ăn ngủ HDV</td><td class="td-note"></td><td class="td-right">Người</td><td class="td-right">1</td><td class="td-right">2</td><td class="td-right">300.000</td><td class="td-right">600.000</td></tr>
+              <tr class="cat-row"><td colspan="6">📦 CHI PHÍ KHÁC</td><td class="cat-total td-right">5.970.000</td></tr>
+              <tr><td class="td-name">Nước uống</td><td class="td-note">Aquafina/Lavie – 2 chai/ngày/khách</td><td class="td-right">Thùng</td><td class="td-right">5</td><td class="td-right">1</td><td class="td-right">150.000</td><td class="td-right">750.000</td></tr>
+              <tr><td class="td-name">Âm thanh + Ánh sáng Gala</td><td class="td-note">Trên bờ biển đảo</td><td class="td-right">Show</td><td class="td-right">1</td><td class="td-right">1</td><td class="td-right">2.500.000</td><td class="td-right">2.500.000</td></tr>
+              <tr><td class="td-name">Tham quan – Bãi Bàng</td><td class="td-note">Chi phí bãi Team Building</td><td class="td-right">Người</td><td class="td-right">30</td><td class="td-right">1</td><td class="td-right">40.000</td><td class="td-right">1.200.000</td></tr>
+              <tr><td class="td-name">Nón du lịch</td><td class="td-note"></td><td class="td-right">Nón</td><td class="td-right">30</td><td class="td-right">1</td><td class="td-right">20.000</td><td class="td-right">600.000</td></tr>
+              <tr><td class="td-name">Khăn lạnh</td><td class="td-note"></td><td class="td-right">Cái</td><td class="td-right">60</td><td class="td-right">1</td><td class="td-right">2.000</td><td class="td-right">120.000</td></tr>
+              <tr><td class="td-name">In ấn – Banner</td><td class="td-note"></td><td class="td-right">Cái</td><td class="td-right">1</td><td class="td-right">1</td><td class="td-right">200.000</td><td class="td-right">200.000</td></tr>
+              <tr><td class="td-name">Bảo hiểm du lịch</td><td class="td-note"></td><td class="td-right">Gói</td><td class="td-right">30</td><td class="td-right">2</td><td class="td-right">10.000</td><td class="td-right">600.000</td></tr>
+              <tr class="sum-row"><td colspan="6"><strong>Tổng cộng dịch vụ (chưa bao gồm VAT)</strong></td><td class="td-right"><strong>51.420.000</strong></td></tr>
+              <tr class="tax-row"><td colspan="6">Phí tổ chức <span class="tax-pct">8%</span></td><td class="td-right">4.113.600</td></tr>
+              <tr class="tax-row"><td colspan="6">Thuế VAT <span class="tax-pct">8%</span></td><td class="td-right">4.442.688</td></tr>
+              <tr class="grand-row"><td colspan="6"><strong>TỔNG GIÁ TRỊ HỢP ĐỒNG SAU THUẾ</strong></td><td class="td-right"><strong>59.976.288 đ</strong></td></tr>
+            </tbody>
+          </table>
+          <div class="per-person-bar">
+            <div class="pp-label">Chi phí / khách (30 người)<span>Đã bao gồm phí tổ chức 8% và thuế VAT 8%</span></div>
+            <div class="pp-val">1.999.210 <small>đ/người</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: KHÁCH SẠN & LƯU TRÚ
+════════════════════════════════════════════════════ -->
+<section class="s-hotels" id="hotels">
+  <div class="section-inner">
+    <div class="section-label">Lưu trú chất lượng</div>
+    <h2 class="section-title">Khách Sạn & Nơi Lưu Trú</h2>
+    <p class="section-desc">Đa dạng lựa chọn phù hợp nhu cầu — từ khách sạn 3★ trung tâm Đà Lạt đến homestay hoang sơ giữa đảo Hòn Sơn.</p>
+
+    <div class="hotel-tabs-nav">
+      <button class="ht-btn active" onclick="switchHotel('dl',this)">🌲 Đà Lạt</button>
+      <button class="ht-btn" onclick="switchHotel('hs',this)">🏝️ Hòn Sơn</button>
+    </div>
+
+    <!-- ĐÀ LẠT HOTELS -->
+    <div class="hotel-panel active" id="hotel-dl">
+      <div class="hotels-grid">
+
+        <!-- ROYAL PALACE -->
+        <div class="hotel-card">
+          <div class="hotel-photos">
+            <span class="hotel-badge">⭐ 3 SAO</span>
+            <div class="hotel-photo-slide active" style="background-image:url('img/rp-room2.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/rp-room1.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/rp-lobby.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/rp-restaurant.jpg')"></div>
+            <div class="hotel-photo-nav">
+              <button class="hp-dot active" onclick="slideHotel(this,0)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,1)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,2)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,3)"></button>
+            </div>
+          </div>
+          <div class="hotel-info">
+            <div class="hotel-name">Royal Palace Đà Lạt</div>
+            <div class="hotel-stars">★★★</div>
+            <div class="hotel-features">
+              <span class="hotel-feat">Trung tâm TP</span>
+              <span class="hotel-feat">Buffet sáng</span>
+              <span class="hotel-feat">Hồ bơi</span>
+              <span class="hotel-feat">Nhà hàng</span>
+            </div>
+            <div class="hotel-price-row">
+              <div><span class="hotel-price">400.000đ</span> <span class="hotel-price-unit">/ suất ngủ / khách</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FLORA -->
+        <div class="hotel-card">
+          <div class="hotel-photos">
+            <span class="hotel-badge">⭐ 3 SAO</span>
+            <div class="hotel-photo-slide active" style="background-image:url('img/flora-room1.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/flora-room2.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/flora-lobby.jpg')"></div>
+            <div class="hotel-photo-nav">
+              <button class="hp-dot active" onclick="slideHotel(this,0)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,1)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,2)"></button>
+            </div>
+          </div>
+          <div class="hotel-info">
+            <div class="hotel-name">Flora Hotel Đà Lạt</div>
+            <div class="hotel-stars">★★★</div>
+            <div class="hotel-features">
+              <span class="hotel-feat">View thành phố</span>
+              <span class="hotel-feat">Phòng rộng</span>
+              <span class="hotel-feat">Thiết kế hiện đại</span>
+            </div>
+            <div class="hotel-price-row">
+              <div><span class="hotel-price">400.000đ</span> <span class="hotel-price-unit">/ suất ngủ / khách</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LILY -->
+        <div class="hotel-card">
+          <div class="hotel-photos">
+            <span class="hotel-badge">⭐ 3 SAO</span>
+            <div class="hotel-photo-slide active" style="background-image:url('img/lily-lobby.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/lily-room1.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/lily-room2.jpg')"></div>
+            <div class="hotel-photo-nav">
+              <button class="hp-dot active" onclick="slideHotel(this,0)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,1)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,2)"></button>
+            </div>
+          </div>
+          <div class="hotel-info">
+            <div class="hotel-name">Lily Hotel Đà Lạt</div>
+            <div class="hotel-stars">★★★</div>
+            <div class="hotel-features">
+              <span class="hotel-feat">Trung tâm TP</span>
+              <span class="hotel-feat">Sảnh sang trọng</span>
+              <span class="hotel-feat">Phòng đôi rộng</span>
+            </div>
+            <div class="hotel-price-row">
+              <div><span class="hotel-price">400.000đ</span> <span class="hotel-price-unit">/ suất ngủ / khách</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CAMELIA -->
+        <div class="hotel-card">
+          <div class="hotel-photos">
+            <span class="hotel-badge">⭐ 3 SAO</span>
+            <div class="hotel-photo-slide active" style="background-image:url('img/camelia-lobby.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/camelia-room1.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/camelia-room2.jpg')"></div>
+            <div class="hotel-photo-nav">
+              <button class="hp-dot active" onclick="slideHotel(this,0)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,1)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,2)"></button>
+            </div>
+          </div>
+          <div class="hotel-info">
+            <div class="hotel-name">Camelia Hotel Đà Lạt</div>
+            <div class="hotel-stars">★★★</div>
+            <div class="hotel-features">
+              <span class="hotel-feat">Sảnh đại lý</span>
+              <span class="hotel-feat">Phong cách cổ điển</span>
+              <span class="hotel-feat">Trung tâm TP</span>
+            </div>
+            <div class="hotel-price-row">
+              <div><span class="hotel-price">400.000đ</span> <span class="hotel-price-unit">/ suất ngủ / khách</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WESTERIA / THÀNH ĐỒNG -->
+        <div class="hotel-card">
+          <div class="hotel-photos" style="background:linear-gradient(135deg,#1a3a5c,#2d6a4f);display:flex;align-items:center;justify-content:center">
+            <span class="hotel-badge">⭐ 3 SAO</span>
+            <div style="text-align:center;color:rgba(255,255,255,0.7)">
+              <div style="font-size:36px;margin-bottom:8px">🏨</div>
+              <div style="font-size:13px;font-weight:600">Westeria / Thành Đồng</div>
+            </div>
+          </div>
+          <div class="hotel-info">
+            <div class="hotel-name">Westeria · Thành Đồng</div>
+            <div class="hotel-stars">★★★</div>
+            <div class="hotel-features">
+              <span class="hotel-feat">Tiêu chuẩn quốc tế</span>
+              <span class="hotel-feat">Phòng sạch sẽ</span>
+              <span class="hotel-feat">Trung tâm TP</span>
+            </div>
+            <div class="hotel-price-row">
+              <div><span class="hotel-price">400.000đ</span> <span class="hotel-price-unit">/ suất ngủ / khách</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <p style="margin-top:20px;font-size:12px;color:var(--gray);font-style:italic">* Golden Link sẽ sắp xếp khách sạn phù hợp nhất trong danh sách trên tùy theo tình trạng phòng tại thời điểm đặt. Toàn bộ đều đạt chuẩn 3★ trung tâm TP. Đà Lạt.</p>
+    </div>
+
+    <!-- HÒN SƠN HOTELS -->
+    <div class="hotel-panel" id="hotel-hs">
+      <div class="hotels-grid" style="grid-template-columns:repeat(2,1fr);max-width:740px">
+
+        <!-- HOMESTAY YẾN LINH -->
+        <div class="hotel-card">
+          <div class="hotel-photos">
+            <span class="hotel-badge">🏡 HOMESTAY</span>
+            <div class="hotel-photo-slide active" style="background-image:url('img/yl-room1.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/yl-room2.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/yl-common.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/yl-exterior.jpg')"></div>
+            <div class="hotel-photo-nav">
+              <button class="hp-dot active" onclick="slideHotel(this,0)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,1)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,2)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,3)"></button>
+            </div>
+          </div>
+          <div class="hotel-info">
+            <div class="hotel-name">Homestay Yến Linh</div>
+            <div class="hotel-stars">🏝️ Hòn Sơn</div>
+            <div class="hotel-features">
+              <span class="hotel-feat">Ngay mặt biển</span>
+              <span class="hotel-feat">Máy lạnh</span>
+              <span class="hotel-feat">Phong cách đảo</span>
+              <span class="hotel-feat">Gần Bãi Bàng</span>
+            </div>
+            <div class="hotel-price-row">
+              <div><span class="hotel-price">500.000đ</span> <span class="hotel-price-unit">/ phòng / đêm</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- THÔNG TIN ĐẢO -->
+        <div class="hotel-card">
+          <div class="hotel-photos">
+            <span class="hotel-badge">🌊 ĐẢO XANH</span>
+            <div class="hotel-photo-slide active" style="background-image:url('img/dest-honson-beach.jpg')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/dest-honson-bai.webp')"></div>
+            <div class="hotel-photo-slide" style="background-image:url('img/dest-honson-road.jpg')"></div>
+            <div class="hotel-photo-nav">
+              <button class="hp-dot active" onclick="slideHotel(this,0)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,1)"></button>
+              <button class="hp-dot" onclick="slideHotel(this,2)"></button>
+            </div>
+          </div>
+          <div class="hotel-info">
+            <div class="hotel-name">Hòn Sơn – Đảo Hoang Sơ</div>
+            <div class="hotel-stars">🏝️ Kiên Giang</div>
+            <div class="hotel-features">
+              <span class="hotel-feat">Bãi Bàng trong xanh</span>
+              <span class="hotel-feat">Lặn ngắm san hô</span>
+              <span class="hotel-feat">Hải sản tươi</span>
+              <span class="hotel-feat">60 phút tàu cao tốc</span>
+            </div>
+            <div class="hotel-price-row">
+              <div><span class="hotel-price">Tàu cao tốc</span> <span class="hotel-price-unit">180.000đ / lượt</span></div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1762,10 +2148,9 @@
       <div class="form-group"><label>Email</label><input type="email" placeholder="example@fpt.com.vn"></div>
       <div class="form-group">
         <label style="margin-bottom:8px;display:block">Điểm Đến Ưu Tiên (Chọn một hoặc nhiều)</label>
-        <div class="dest-choices">
-          <label class="dest-label"><input type="checkbox"><span class="dest-emoji">🏖️</span><span class="dest-text">PHAN THIẾT<br><small style="opacity:.6">3.983k/khách</small></span></label>
-          <label class="dest-label"><input type="checkbox"><span class="dest-emoji">🌊</span><span class="dest-text">VŨNG TÀU<br><small style="opacity:.6">4.379k/khách</small></span></label>
+        <div class="dest-choices" style="grid-template-columns:1fr 1fr">
           <label class="dest-label"><input type="checkbox"><span class="dest-emoji">🌲</span><span class="dest-text">ĐÀ LẠT<br><small style="opacity:.6">4.168k/khách</small></span></label>
+          <label class="dest-label"><input type="checkbox"><span class="dest-emoji">🏝️</span><span class="dest-text">HÒN SƠN<br><small style="opacity:.6">Đang cập nhật</small></span></label>
         </div>
       </div>
       <div class="form-group"><label>Yêu Cầu Chỉnh Sửa Riêng</label><textarea placeholder="Ví dụ: Nâng cấp KS 4★, thêm gói massage, thay đổi điểm tham quan..."></textarea></div>
@@ -1813,6 +2198,33 @@
 </section>
 
 <script>
+  // Hotel tabs
+  function switchHotel(id, btn) {
+    document.querySelectorAll('.ht-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.hotel-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('hotel-' + id).classList.add('active');
+  }
+
+  // Hotel photo slider
+  function slideHotel(dot, idx) {
+    const card = dot.closest('.hotel-photos');
+    card.querySelectorAll('.hotel-photo-slide').forEach((s,i) => s.classList.toggle('active', i === idx));
+    card.querySelectorAll('.hp-dot').forEach((d,i) => d.classList.toggle('active', i === idx));
+  }
+
+  // Auto-slide hotel photos every 3s
+  setInterval(() => {
+    document.querySelectorAll('.hotel-panel.active .hotel-photos').forEach(card => {
+      const slides = card.querySelectorAll('.hotel-photo-slide');
+      const dots   = card.querySelectorAll('.hp-dot');
+      let cur = Array.from(slides).findIndex(s => s.classList.contains('active'));
+      let next = (cur + 1) % slides.length;
+      slides.forEach((s,i) => s.classList.toggle('active', i === next));
+      dots.forEach((d,i) => d.classList.toggle('active', i === next));
+    });
+  }, 3000);
+
   function switchPrice(id, btn) {
     document.querySelectorAll('.pt-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.price-panel').forEach(p => p.classList.remove('active'));
